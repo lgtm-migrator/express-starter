@@ -14,7 +14,7 @@ router.get('/', function(req, res, next) {
  * echo api
  */
 router.post('/echo', req => {
-    res.json(req.body);
+    req.res.json(req.body);
 });
 
 /**
