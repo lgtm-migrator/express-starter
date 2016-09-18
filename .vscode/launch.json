@@ -11,13 +11,14 @@
             "preLaunchTask": null,
             "runtimeExecutable": null,
             "runtimeArgs": [
-                "--nolazy"
+                "--nolazy",
+                "--harmony"
             ],
             "env": {
-                "NODE_ENV": "development"
+                "NODE_ENV": "development",
+                "DEBUG": "express-demo:*"
             },
-            "externalConsole": false,
-            "sourceMaps": false,
+            "sourceMaps": true,
             "outDir": null
         },
         {
@@ -36,7 +37,6 @@
             "env": {
                 "NODE_ENV": "production"
             },
-            "externalConsole": false,
             "sourceMaps": true,
             "outDir": null
         },

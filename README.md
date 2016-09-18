@@ -11,6 +11,10 @@
 npm install
 npm start
 ```
+如果需要查看调试信息
+```
+set DEBUG=express-demo:*&&npm start
+```
 
 ### 部署
 ```
@@ -18,3 +22,13 @@ npm install
 npm run compile
 npm start --production
 ```
+
+### 调试信息
+如果需要查看调试信息，需要在环境变量中设置DEBUG=express-demo:*
+
+### 其他
+在vs code环境下
+
+可以使用ctrl+shift+b完成编译
+
+可以使用F5直接调试
