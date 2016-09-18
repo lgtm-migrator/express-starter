@@ -9,7 +9,7 @@ const express = require('express'),
     users = require('./routes/users'),
     api = require('./routes/api'),
 
-    _404 = require('./lib/nofound'),
+    _404 = require('./lib/notfound'),
     err = require('./lib/err'),
     db = require('./lib/db'),
 

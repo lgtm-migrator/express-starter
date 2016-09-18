@@ -6,17 +6,17 @@
     "isShellCommand": true,
     "showOutput": "always",
     "suppressTaskName": true,
-    "tasks": [
-        {
+    "tasks": [{
             "taskName": "install",
             "args": [
                 "install"
             ]
         },
         {
-            "taskName": "update",
+            "taskName": "clean",
             "args": [
-                "update"
+                "run",
+                "clean"
             ]
         },
         {

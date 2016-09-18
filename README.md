@@ -32,3 +32,9 @@ npm start --production
 可以使用ctrl+shift+b完成编译
 
 可以使用F5直接调试
+
+### 环境变量
+
+* CONNSTR 连接字符串
+* PORT 监听端口
+* NODE_ENV 运行环境

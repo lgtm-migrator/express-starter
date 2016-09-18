@@ -1,15 +1,13 @@
-var Sequelize = require('sequelize');
-var debug = require('debug')('express-demo:db');
-
-var sequelize = new Sequelize(process.env.CONNSTR || 'sqlite:sqlite.db', { logging: debug });
+const Sequelize = require('sequelize'),
+    debug = require('debug')('express-demo:db'),
+    models = require('../models'),
+    connectionStr = process.env.CONNSTR || 'sqlite:sqlite.db',
+    sequelize = new Sequelize(connectionStr, { logging: debug });
 
 sequelize.authenticate()
     .then(() => {
         debug('Database connected');
-        var User = sequelize.define('user', {
-            username: Sequelize.STRING,
-            birthday: Sequelize.DATE
-        });
+        models.forEach(model => sequelize.define(model.name, model.model));
         return sequelize.sync({ force: true });
     })
     .then(() => {
@@ -24,6 +22,7 @@ module.exports = () => {
     return req => {
         req.db = sequelize;
         req.models = sequelize.models;
+        console.log(req.models);
         req.next();
     }
 }
