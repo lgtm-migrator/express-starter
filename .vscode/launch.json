@@ -1,7 +1,6 @@
 {
     "version": "0.2.0",
-    "configurations": [
-        {
+    "configurations": [{
             "name": "Debug",
             "type": "node",
             "request": "launch",
@@ -21,7 +20,7 @@
             "sourceMaps": false,
             "outDir": null
         },
-                {
+        {
             "name": "Prod",
             "type": "node",
             "request": "launch",

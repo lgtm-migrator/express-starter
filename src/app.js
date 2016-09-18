@@ -9,6 +9,9 @@ const express = require('express'),
     users = require('./routes/users'),
     api = require('./routes/api'),
 
+    _404 = require('./lib/nofound'),
+    err = require('./lib/err'),
+
     app = express();
 
 // view engine setup
@@ -28,35 +31,11 @@ app.use('/users', users);
 app.use('/api', api);
 
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
-    next(err);
-});
+app.use(_404());
 
 // error handlers
 
-// development error handler
-// will print stacktrace
-if (app.get('env') === 'development') {
-    app.use(function (err, req, res, next) {
-        res.status(err.status || 500);
-        res.render('error', {
-            message: err.message,
-            error: err
-        });
-    });
-}
-
-// production error handler1    
-// no stacktraces leaked to user
-app.use(function (err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-        message: err.message,
-        error: {}
-    });
-});
+app.use(err());
 
 
 module.exports = app;

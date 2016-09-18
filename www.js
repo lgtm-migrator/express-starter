@@ -14,10 +14,17 @@
  */
 
 
-/**
+var run_env = process.env.NODE_ENV || "development"
+
+/** 
  * 根据执行环境 判断入口位置
  */
-var apppath = process.env.NODE_ENV == 'production' ? './bin/app' : './src/app'
+var apppath = run_env == 'production' ? './bin/app' : './src/app'
+
+if (run_env == "development") {
+    // 使用babel-register
+    require("babel-register");
+}
 
 /**
  * Module dependencies.
@@ -101,5 +108,5 @@ function onError(error) {
 function onListening() {
     var addr = server.address();
     var bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port;
-    console.info(`Listening on ${bind} and run mode is ${process.env.NODE_ENV}`);
+    console.info(`Listening on ${bind} and run mode is ${run_env}`);
 }
