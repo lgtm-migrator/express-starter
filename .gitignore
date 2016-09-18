@@ -30,4 +30,7 @@ node_modules
 npm-debug.log
 
 # bower
-public/lib
+static/lib
+
+# babel-gen
+bin

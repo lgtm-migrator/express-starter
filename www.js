@@ -1,10 +1,28 @@
 #!/usr/bin/env node
 
 /**
- * Module dependencies.
+ * !!!
+ * DO NOT MODIFY THIS FILE
+ * UNLESS YOU KNOW WAHT THIS FILE DO
+ * !!!
  */
 
-var app = require('../app');
+
+/**
+ * 这里是程序的入口
+ * express的配置在 src/app.js
+ */
+
+
+/**
+ * 根据执行环境 判断入口位置
+ */
+var apppath = process.env.NODE_ENV == 'production' ? './bin/app' : './src/app'
+
+/**
+ * Module dependencies.
+ */
+var app = require(apppath);
 var debug = require('debug')('express-demo:server');
 var http = require('http');
 
@@ -83,5 +101,5 @@ function onError(error) {
 function onListening() {
     var addr = server.address();
     var bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port;
-    console.info('Listening on ' + bind);
+    console.info(`Listening on ${bind} and run mode is ${process.env.NODE_ENV}`);
 }
