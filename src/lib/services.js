@@ -1,9 +1,10 @@
 const services = require("../services"),
-    debug = require('debug')('express-demo:mount services');
+    debug = require('./debug')('services');
 
 const mountServices = app => {
     app.services = app.services || {}
     services.forEach(item => {
+        debug(`mount service ${item.name}`)
         app.services[item.name] = new item.service(app);
     });
     return req => {

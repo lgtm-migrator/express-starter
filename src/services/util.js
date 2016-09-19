@@ -12,7 +12,7 @@ class Util {
     }
 
     sayHello() {
-        console.log(hello);
+        console.log('hello');
     }
 
 }

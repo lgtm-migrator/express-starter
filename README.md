@@ -45,6 +45,7 @@ npm run gendoc
 * CONNSTR 连接字符串
 * PORT 监听端口
 * NODE_ENV 运行环境
+* PROJNAME 项目名称
 
 ### 其他
 在vs code环境下

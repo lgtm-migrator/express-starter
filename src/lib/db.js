@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize'),
-    debug = require('debug')('express-demo:db'),
+    debug = require('./debug')('db'),
     models = require('../models'),
     connectionStr = process.env.CONNSTR || 'sqlite:sqlite.db',
     sequelize = new Sequelize(connectionStr, { logging: debug });

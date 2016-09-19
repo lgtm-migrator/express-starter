@@ -2,8 +2,8 @@ const router = require('express').Router()
 
 
 /**
- * @api {get} /api api welcome
- * @apiName welcome api
+ * @api {get} /api Welcome
+ * @apiName welcome 
  * @apiGroup api
  * 
  * @apiSuccessExample Success Response
@@ -20,11 +20,20 @@ router.get('/', function(req, res, next) {
 });
 
 /**
- * @api {post} /api/echo return request body 
- * @apiName echo
+ * @apiDescribe 返回客户端发送的实体
+ * 
+ * @api {post} /api/echo Echo
+ * @apiName Echo
  * @apiGroup api
  * 
  * @apiParam value 任意字段任意值
+ * 
+ * @apiSuccessExample json Success Response
+ * {
+    "param1": "value1",
+    "param2": "value2"
+}
+ * 
  **/
 router.post('/echo', req => {
     req.res.json(req.body);

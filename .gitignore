@@ -37,3 +37,6 @@ bin
 
 # docs
 doc
+
+# sqlite
+sqlite.db
