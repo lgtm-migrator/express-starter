@@ -7,7 +7,7 @@
     },
     "scripts": {
         "start": "node ./www.js",
-        "compile": "babel src --out-dir bin --source-maps -D",
+        "compile": "babel src --out-dir bin --source-maps inline -D --no-comments",
         "postinstall": "node ./node_modules/bower/bin/bower install",
         "clean": "",
         "gendoc": "node ./node_modules/apidoc/bin/apidoc -i src -o doc"
