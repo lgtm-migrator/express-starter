@@ -17,7 +17,8 @@ sequelize.authenticate()
         console.error('Unable to connect to the database:', err);
     });
 
-module.exports = () => {
+module.exports = app => {
+    app.db = sequelize;
     return req => {
         req.db = sequelize;
         req.models = sequelize.models;

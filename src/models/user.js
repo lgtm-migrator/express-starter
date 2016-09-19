@@ -1,5 +1,13 @@
-import Sequelize from 'Sequelize'
+const Sequelize = require('Sequelize')
 
+/**
+ * @apiDefine UserModel
+ * 
+ * @apiParam username STRING
+ * @apiParam password STRING
+ * @apiParam birthday DATE
+ * 
+ **/
 const user = {
     username: Sequelize.STRING,
     password: Sequelize.STRING,

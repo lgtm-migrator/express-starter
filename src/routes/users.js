@@ -14,11 +14,9 @@ router.get('/', function(req, res, next) {
  * @apiName Add User
  * @apiGroup Users
  * 
- * @apiParam username String
- * @apiParam password String
- * @apiParam bIrthday Date
+ * @apiUse UserModel
  * 
- * @apiSuccessExample Success Response
+ * @apiSuccessExample {json} Success Response
  *     {
     "createdAt": "2016-09-19T03:07:05.818Z",
     "id": 2,

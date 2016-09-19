@@ -23,7 +23,7 @@ var apppath = run_env == 'production' ? './bin/app' : './src/app'
 
 if (run_env == "development") {
     // 使用babel-register
-    require("babel-register");
+    // require("babel-register");
 }
 
 /**

@@ -1,4 +1,4 @@
-import Sequelize from 'Sequelize'
+const Sequelize = require('Sequelize')
 
 const page = {
     title: Sequelize.STRING,

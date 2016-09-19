@@ -6,6 +6,8 @@
 
 使用babel以支持ES6/ES7 特性
 
+使用apidoc生成文档
+
 ### 开发
 ```
 npm install
@@ -17,6 +19,7 @@ set DEBUG=express-demo:*&&npm start
 ```
 
 ### 部署
+
 ```
 npm install
 npm run compile
@@ -30,10 +33,10 @@ npm start --production
 ### 生成文档
 
 ```
-npm i -g apidoc
-apidoc -i src -i doc
+npm run gendoc
 ```
 打开doc/index.html即可
+运行时可以访问:3000/doc路径
 
 如果需要撰写文档，可参看已有文档
 

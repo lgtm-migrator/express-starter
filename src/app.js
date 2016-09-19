@@ -12,6 +12,7 @@ const express = require('express'),
     _404 = require('./lib/notfound'),
     err = require('./lib/err'),
     db = require('./lib/db'),
+    services = require('./lib/services'),
 
     app = express();
 
@@ -26,8 +27,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../static')));
+app.use('/doc', express.static(path.join(__dirname, '../doc')));
 
-app.use(db());
+app.use(db(app));
+app.use(services(app));
 
 app.use('/', index);
 app.use('/users', users);
