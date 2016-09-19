@@ -2,6 +2,7 @@ import Sequelize from 'Sequelize'
 
 const user = {
     username: Sequelize.STRING,
+    password: Sequelize.STRING,
     birthday: Sequelize.DATE
 }
 

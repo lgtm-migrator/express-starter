@@ -17,12 +17,10 @@ sequelize.authenticate()
         console.error('Unable to connect to the database:', err);
     });
 
-
 module.exports = () => {
     return req => {
         req.db = sequelize;
         req.models = sequelize.models;
-        console.log(req.models);
         req.next();
     }
 }

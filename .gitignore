@@ -34,3 +34,6 @@ static/lib
 
 # babel-gen
 bin
+
+# docs
+doc

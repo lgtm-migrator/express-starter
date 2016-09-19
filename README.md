@@ -24,7 +24,24 @@ npm start --production
 ```
 
 ### 调试信息
+
 如果需要查看调试信息，需要在环境变量中设置DEBUG=express-demo:*
+
+### 生成文档
+
+```
+npm i -g apidoc
+apidoc -i src -i doc
+```
+打开doc/index.html即可
+
+如果需要撰写文档，可参看已有文档
+
+### 环境变量
+
+* CONNSTR 连接字符串
+* PORT 监听端口
+* NODE_ENV 运行环境
 
 ### 其他
 在vs code环境下
@@ -33,8 +50,3 @@ npm start --production
 
 可以使用F5直接调试
 
-### 环境变量
-
-* CONNSTR 连接字符串
-* PORT 监听端口
-* NODE_ENV 运行环境
