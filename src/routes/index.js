@@ -20,4 +20,9 @@ router.get('/', function(req, res, next) {
     res.render('index', { title: 'Express' });
 });
 
+
+router.get('/app',req=>{
+    req.res.json(req.services.util.sayHello());
+});
+
 module.exports = router;
