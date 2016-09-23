@@ -2,13 +2,7 @@
 const nodemailer = require('nodemailer'),
   Base = require('../lib/service-base'),
   debug = require('../lib/debug')('mail service'),
-  mailerOpt = {
-    service: 'QQ',
-    auth: {
-      user: '2897523786@qq.com',
-      pass: 'vjvdjncmphdxdhca'
-    }
-  };
+  mailerOpt = require('../configs/mail');
 
 /**
  * 发送邮件Service
@@ -25,6 +19,7 @@ class Mailer extends Base {
       from: `"No Reply" <${mailerOpt.auth.user}>`,
       to: receivers,
       subject: subject,
+      text: '',
       html: content
     }
     this.mailer.sendMail(mail, (err, info) => {

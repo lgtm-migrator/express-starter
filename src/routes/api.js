@@ -85,4 +85,7 @@ router.get('/address', req => {
 })
 
 
-module.exports = router;
+module.exports = {
+  router: router,
+  path: "/api"
+};

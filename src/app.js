@@ -1,20 +1,18 @@
 const express = require('express'),
-    path = require('path'),
-    favicon = require('serve-favicon'),
-    logger = require('morgan'),
-    cookieParser = require('cookie-parser'),
-    bodyParser = require('body-parser'),
+  path = require('path'),
+  favicon = require('serve-favicon'),
+  logger = require('morgan'),
+  cookieParser = require('cookie-parser'),
+  bodyParser = require('body-parser'),
 
-    index = require('./routes/index'),
-    users = require('./routes/users'),
-    api = require('./routes/api'),
+  _404 = require('./lib/notfound'),
+  err = require('./lib/err'),
+  db = require('./lib/db'),
+  services = require('./lib/services'),
+  routes = require('./lib/routes'),
 
-    _404 = require('./lib/notfound'),
-    err = require('./lib/err'),
-    db = require('./lib/db'),
-    services = require('./lib/services'),
 
-    app = express();
+  app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -32,9 +30,7 @@ app.use('/doc', express.static(path.join(__dirname, '../doc')));
 app.use(db(app));
 app.use(services(app));
 
-app.use('/', index);
-app.use('/users', users);
-app.use('/api', api);
+routes(app);
 
 // catch 404 and forward to error handler
 app.use(_404());

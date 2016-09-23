@@ -8,9 +8,8 @@
   "scripts": {
     "start": "node ./www.js --use_strict",
     "compile": "babel src --out-dir bin --source-maps inline -D --no-comments",
-    "postinstall": "npm run installFront&&npm run gendoc",
+    "postinstall": "npm run installFront&&npm run compile&&npm run gendoc",
     "installFront": "node ./node_modules/bower/bin/bower install",
-    "clean": "",
     "gendoc": "node ./node_modules/apidoc/bin/apidoc -i src -o doc"
   },
   "dependencies": {
