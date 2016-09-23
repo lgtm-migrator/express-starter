@@ -1,0 +1,45 @@
+'use strict'
+const nodemailer = require('nodemailer'),
+  Base = require('../lib/service-base'),
+  debug = require('../lib/debug')('mail service'),
+  mailerOpt = {
+    service: 'QQ',
+    auth: {
+      user: '2897523786@qq.com',
+      pass: 'vjvdjncmphdxdhca'
+    }
+  };
+
+/**
+ * 发送邮件Service
+ */
+class Mailer extends Base {
+
+  constructor(app) {
+    super(app);
+    this.mailer = nodemailer.createTransport(mailerOpt);
+  }
+
+  sendMail(receivers, subject, content) {
+    const mail = {
+      from: `"No Reply" <${mailerOpt.auth.user}>`,
+      to: receivers,
+      subject: subject,
+      html: content
+    }
+    this.mailer.sendMail(mail, (err, info) => {
+      if (err) {
+        console.error("send mail error");
+        debug(err.stack);
+      } else
+        debug(`Message sent: ${info.response}`);
+    })
+    return;
+  }
+
+}
+
+module.exports = {
+  name: "mailer",
+  service: Mailer
+}

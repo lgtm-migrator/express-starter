@@ -1,3 +1,5 @@
+'use strict'
+
 const router = require('express').Router()
 
 
@@ -13,10 +15,10 @@ const router = require('express').Router()
 }
  **/
 router.get('/', function(req, res, next) {
-    res.json({
-        type: "spi",
-        message: "welcome to api"
-    });
+  res.json({
+    type: "spi",
+    message: "welcome to api"
+  });
 });
 
 /**
@@ -36,7 +38,7 @@ router.get('/', function(req, res, next) {
  * 
  **/
 router.post('/echo', req => {
-    req.res.json(req.body);
+  req.res.json(req.body);
 });
 
 /**
@@ -47,6 +49,40 @@ router.post('/echo', req => {
  **/
 router.get('/echo', req => req.res.render('echo', { title: "echo" }));
 
+
+
+/**
+ * @apiDescription 
+ * 发送测试邮件
+ * 可以使用所有方法
+ * 可以使用Query String/Body传递参数
+ * 
+ * @api {all} /api/sendMailTo sendMail
+ * @apiName sendMail
+ * @apiGroup api
+ * 
+ * @apiParam address 接收地址
+ **/
+router.all('/sendMailTo', req => {
+  const address = req.param('address');
+  const mailer = req.services.mailer;
+  mailer.sendMail(address, 'hello world', '<a href="http://git.suntao.science">点此打开我的git</a>')
+  req.res.end(`Success，请检查你的邮箱 ${address}，多半在垃圾邮件文件夹里`);
+})
+
+
+/**
+ * @apiDescription 服务器地址
+ * @api {get} /api/address server host url
+ * @apiName server host url
+ * @apiGroup api
+ * 
+ * @apiSuccessExample Success Response
+ * http://localhost:3000
+ **/
+router.get('/address', req => {
+  req.res.end(req.services.util.serviceUrl(req));
+})
 
 
 module.exports = router;

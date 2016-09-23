@@ -1,12 +1,13 @@
-var express = require('express');
-var router = express.Router();
+'use strict'
+const express = require('express');
+const router = express.Router();
 
 
 /**
  * @apiDescription 获取一个用户
  * @api {get} /users Get User
  * @apiName Get User
- * @apiGroup Users
+ * @apiGroup users
  * 
  * @apiParam id Integer 
  * @apiSuccessExample {json} Success Response
@@ -20,11 +21,11 @@ var router = express.Router();
 }
  **/
 router.get('/', function(req, res, next) {
-    const id = req.param('id'),
-        repo = req.models.user;
-    repo.findOne({ where: { id: id } })
-        .then(u => req.res.json(u))
-        .catch(err => req.next(err));
+  const id = req.param('id'),
+    repo = req.models.user;
+  repo.findOne({ where: { id: id } })
+    .then(u => req.res.json(u))
+    .catch(err => req.next(err));
 });
 
 
@@ -33,7 +34,7 @@ router.get('/', function(req, res, next) {
  * 
  * @api {post} /users Add User
  * @apiName Add User
- * @apiGroup Users
+ * @apiGroup users
  * 
  * @apiUse UserModel
  * 
@@ -47,10 +48,44 @@ router.get('/', function(req, res, next) {
 }
  **/
 router.post('/', req => {
-    const repo = req.models.user;
-    repo.create(req.body)
-        .then(inserted => req.res.json(inserted))
-        .catch(err => req.next(err));
+  const repo = req.models.user;
+  const mailer = req.services.mailer;
+  const util = req.services.util;
+  const serverurl = util.serverUrl(req);
+  let newUser = Object.assign({ status: "not check mail" }, req.body);
+  repo.create(newUser)
+    .then(inserted => {
+      mailer.sendMail(newUser.email, '激活', `<a href="${serverurl}/users/activate?id=${inserted.id}">点此激活</a>`)
+      req.res.json(inserted)
+    })
+    .catch(err => req.next(err));
+});
+
+
+/**
+ * @apiDescription 账户激活
+ * @api {get} /users/activate activate user
+ * @apiName activate user
+ * @apiGroup users
+ * 
+ * @apiParam id 用户的id
+ * @apiSuccessExample Success Response
+ * activate success
+ **/
+router.get('/activate', req => {
+  const repo = req.models.user;
+  const id = req.query.id;
+  repo.findById(id)
+    .then(u => {
+      u.status = "email checked";
+      return u.save()
+    })
+    .then(() => {
+      req.res.end("activate success");
+    })
+    .catch(err => {
+      req.res.end("activate error");
+    })
 });
 
 module.exports = router;

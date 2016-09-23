@@ -9,14 +9,22 @@ const Sequelize = require('Sequelize')
  * 
  **/
 const user = {
-    username: Sequelize.STRING,
-    password: Sequelize.STRING,
-    birthday: Sequelize.DATE
+  id: {
+    type: Sequelize.STRING,
+    primaryKey: true,
+    defaultValue: Sequelize.UUIDV4
+  },
+  email: Sequelize.STRING,
+  username: Sequelize.STRING,
+  password: Sequelize.STRING,
+  birthday: Sequelize.DATE,
+  status: Sequelize.STRING
 }
 
 /**
  * Sequelize sync之后
- * 会多出id createDate 和modifyDate三个字段
+ * (如果没有定义的话)
+ * 会多出id,createDate,和modifyDate三个字段
  */
 
 
@@ -26,6 +34,6 @@ const user = {
  * 例如这个model的访问方法就是req.models.user
  */
 module.exports = {
-    name: "user",
-    model: user
+  name: "user",
+  model: user
 }
