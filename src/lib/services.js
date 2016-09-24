@@ -1,6 +1,11 @@
 const services = require("../services"),
   debug = require('./debug')('services');
 
+/**
+ * 将src/services路径下
+ * 所有的service的实例挂载到app对象上
+ */
+
 const mountServices = app => {
   app.services = app.services || {}
   services.forEach(item => {

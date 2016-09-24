@@ -8,6 +8,10 @@
 
 使用apidoc生成文档
 
+使用nodemailer发送邮件
+
+使用log4js记录日志
+
 ### 开发
 ```
 npm install
