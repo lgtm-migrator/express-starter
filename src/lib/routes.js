@@ -1,6 +1,9 @@
 'use strict'
-const routes = require("../routes"),
-  debug = require('./debug')('routes');
+const rd = require('require.d'),
+  routes = rd(`${__dirname}/../routes`),
+  debug = require('./debug')('routes'),
+  forEach = require('lodash').forEach;
+
 
 /**
  * 用于把
@@ -9,10 +12,12 @@ const routes = require("../routes"),
  */
 
 const mountServices = app => {
-  routes.forEach(item => {
-    debug(`mount route on ${item.path}`)
-    app.use(item.path || '/', item.router)
-  });
+  forEach(routes, (route, name) => {
+    const mountPath = route.path || `/${name}`
+    const router = typeof route == "function" ? route : route.router;
+    debug(`Mount route ${name} on ${mountPath}`)
+    app.use(mountPath, router)
+  })
 }
 
 

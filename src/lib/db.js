@@ -2,12 +2,14 @@
  * 数据库配置
  */
 'use strict'
-const Sequelize = require('sequelize'),
+const rd = require('require.d'),
+  Sequelize = require('sequelize'),
   debug = require('./debug')('db'),
-  models = require('../models'),
+  models = rd(__dirname + '/../models'),
   connectionStr = process.env.CONNSTR || 'sqlite:sqlite.db',
   sequelize = new Sequelize(connectionStr, { logging: debug }),
-  syncForce = process.env.NODE_ENV == 'development' ? true : false;
+  syncForce = process.env.NODE_ENV == 'development' ? true : false,
+  _ = require('lodash');
 
 sequelize
   .authenticate()
@@ -17,7 +19,13 @@ sequelize
      * 在这里定义
      * 数据实体
      */
-    models.forEach(model => sequelize.define(model.name, model.model));
+    _.map(models, (model, name) => {
+      const mName = model.name || name;
+      const mModel = model.model || model;
+      sequelize.define(mName, mModel);
+      debug(`Define model ${mName} as ${_.keys(mModel)}`)
+
+    });
     return sequelize.sync({ force: syncForce });
   })
   .then(() => {
@@ -28,7 +36,8 @@ sequelize
     debug("Sync finished")
   })
   .catch(err => {
-    console.error('Unable to connect to the database:', err);
+    console.error('Error happened when db init', err);
+    process.exit(1);
   });
 
 module.exports = app => {

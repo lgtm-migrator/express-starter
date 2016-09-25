@@ -1,6 +1,6 @@
 "use strict"
 
-const Base = require("../lib/service-base")
+const Base = require("./base")
 
 /**
  * Util Service
@@ -32,7 +32,4 @@ class Util extends Base {
 }
 
 
-module.exports = {
-  name: "util",
-  service: Util
-}
+module.exports = Util

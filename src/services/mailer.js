@@ -1,6 +1,6 @@
 'use strict'
 const nodemailer = require('nodemailer'),
-  Base = require('../lib/service-base'),
+  Base = require('./base'),
   debug = require('../lib/debug')('mail service'),
   mailerOpt = require('../configs/mail');
 
@@ -34,7 +34,4 @@ class Mailer extends Base {
 
 }
 
-module.exports = {
-  name: "mailer",
-  service: Mailer
-}
+module.exports = Mailer;

@@ -88,7 +88,4 @@ router.get('/activate', req => {
     })
 });
 
-module.exports = {
-  router: router,
-  path: "/users"
-};
+module.exports = router
